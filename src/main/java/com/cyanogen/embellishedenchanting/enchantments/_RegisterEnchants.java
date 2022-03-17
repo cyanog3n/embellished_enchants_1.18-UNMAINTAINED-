@@ -22,7 +22,7 @@ public class _RegisterEnchants {
             Options.COMMON.ThunderboltRarity.get(),
             EnchantmentCategory.BOW,
             new EquipmentSlot[]{ EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND }
-            //todo: disable effect triggering by punching, in a more reliable manner
+
     ));
 
     public static final RegistryObject<Enchantment> IMMORTAL = ENCHANTS.register("immortal", () -> new ImmortalEnchant(
@@ -83,6 +83,12 @@ public class _RegisterEnchants {
     public static final RegistryObject<Enchantment> SHATTERING = ENCHANTS.register("blurse_of_shattering", () -> new ShatteringEnchant(
             Options.COMMON.ShatteringRarity.get(),
             EnchantmentCategory.WEAPON,
+            new EquipmentSlot[]{ EquipmentSlot.MAINHAND }
+    ));
+
+    public static final RegistryObject<Enchantment> SEISMIC = ENCHANTS.register("seismic", () -> new SeismicEnchant(
+            Options.COMMON.SeismicRarity.get(),
+            EnchantmentCategory.BOW,
             new EquipmentSlot[]{ EquipmentSlot.MAINHAND }
     ));
 

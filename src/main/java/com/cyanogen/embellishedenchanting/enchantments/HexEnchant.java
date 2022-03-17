@@ -67,13 +67,20 @@ public class HexEnchant extends Enchantment{
         ItemStack heldItem = pAttacker.getMainHandItem();
         float attackDamage = 1f;
         float health = target.getMaxHealth();
+        float magicDamage = 0.01f * health * pLevel;
 
         if(heldItem.getItem() instanceof SwordItem sword){
             attackDamage = sword.getDamage() + 1;
         }
 
         target.hurt(DamageSource.playerAttack((Player) pAttacker), attackDamage); //normal attack
-        target.hurt(DamageSource.MAGIC, 0.01f * health * pLevel); //added magic damage
+
+        if(magicDamage <= 20){
+            target.hurt(DamageSource.MAGIC, magicDamage);
+        }
+        else{
+            target.hurt(DamageSource.MAGIC, 20); //caps out at 20 additional damage
+        }
 
     }
 }
