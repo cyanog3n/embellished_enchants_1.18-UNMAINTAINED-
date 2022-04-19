@@ -61,8 +61,9 @@ public class DecayEnchant extends Enchantment{
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity target = (LivingEntity) pTarget;
-        target.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * pLevel, pLevel));
+        if(pTarget instanceof LivingEntity target){
+            target.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * pLevel, pLevel));
+        }
 
     }
 }

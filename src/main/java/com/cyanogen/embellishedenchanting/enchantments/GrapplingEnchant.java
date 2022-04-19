@@ -53,8 +53,11 @@ public class GrapplingEnchant extends Enchantment {
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity living = (LivingEntity) pTarget;
-        DamageSource source = living.getLastDamageSource();
+        DamageSource source = null;
+
+        if(pTarget instanceof LivingEntity living){
+            source = living.getLastDamageSource();
+        }
 
         BlockPos attackerPos = pAttacker.blockPosition();
         BlockPos targetPos = pTarget.blockPosition();
@@ -74,7 +77,6 @@ public class GrapplingEnchant extends Enchantment {
 
         double factor = b / (w*d + 1 + Math.pow(c , -a * (p * d - q)));
         //this is a sigmoid function that tends toward 0 for very large distances
-        //it took me far too much time to adjust the values to what i wanted
 
         double t = factor * x / d;
 
@@ -94,7 +96,6 @@ public class GrapplingEnchant extends Enchantment {
                 pTarget.setDeltaMovement(t, u, v);
             }
         }
-
 
 
     }

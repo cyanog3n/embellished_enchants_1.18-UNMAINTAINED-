@@ -52,16 +52,17 @@ public class AnnihilationEnchant extends Enchantment{
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
 
-        LivingEntity target = (LivingEntity) pTarget;
-        float health = target.getMaxHealth();
+        if(pTarget instanceof LivingEntity target){
+            float health = target.getMaxHealth();
 
-        double n = Math.random();
-        if(n <= 0.01 * pLevel){
-            if(health >= 100){
-                target.hurt(DamageSource.MAGIC, 50);
-            }
-            else{
-                target.setHealth(0);
+            double n = Math.random();
+            if(n <= 0.01 * pLevel){
+                if(health >= 100){
+                    target.hurt(DamageSource.MAGIC, 50);
+                }
+                else{
+                    target.setHealth(0);
+                }
             }
         }
 

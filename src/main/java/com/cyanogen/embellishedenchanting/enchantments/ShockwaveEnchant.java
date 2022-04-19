@@ -2,7 +2,6 @@ package com.cyanogen.embellishedenchanting.enchantments;
 
 import com.cyanogen.embellishedenchanting.config.Options;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.CrossbowItem;
@@ -14,14 +13,13 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
+public class ShockwaveEnchant extends Enchantment{
 
-public class SeismicEnchant extends Enchantment{
-
-    public SeismicEnchant(Enchantment.Rarity p_44676_, EnchantmentCategory p_44677_, EquipmentSlot[] p_44678_) {
+    public ShockwaveEnchant(Enchantment.Rarity p_44676_, EnchantmentCategory p_44677_, EquipmentSlot[] p_44678_) {
         super(p_44676_, p_44677_, p_44678_);
     }
 
-    public static boolean isEnabled =  Options.COMMON.Seismic.get();
+    public static boolean isEnabled =  Options.COMMON.Shockwave.get();
 
     @Override
     public boolean isAllowedOnBooks() {
@@ -66,28 +64,29 @@ public class SeismicEnchant extends Enchantment{
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity living = (LivingEntity) pTarget;
-        DamageSource source = living.getLastDamageSource();
-        Level level = living.getLevel();
-        double radius = 1.5 + 0.5 * pLevel;
+        if(pTarget instanceof LivingEntity living){
+            DamageSource source = living.getLastDamageSource();
+            Level level = living.getLevel();
+            double radius = 1.5 + 0.5 * pLevel;
 
-        BlockPos posT = living.blockPosition();
-        AABB area = new AABB(
-                posT.getX() - radius,
-                posT.getY() - 1,
-                posT.getZ() - radius,
-                posT.getX() + radius,
-                posT.getY() + 1,
-                posT.getZ() + radius);
+            BlockPos posT = living.blockPosition();
+            AABB area = new AABB(
+                    posT.getX() - radius,
+                    posT.getY() - 1,
+                    posT.getZ() - radius,
+                    posT.getX() + radius,
+                    posT.getY() + 1,
+                    posT.getZ() + radius);
 
-        List<Entity> list = level.getEntities(pTarget, area);
+            List<Entity> list = level.getEntities(pTarget, area);
 
 
-        if(source != null && source.isProjectile()){
+            if(source != null && source.isProjectile()){
 
-            for(Entity e : list){
-                if(e instanceof LivingEntity entity && e != pAttacker){
-                    entity.hurt(DamageSource.GENERIC, 0.5f + 0.5f * pLevel);
+                for(Entity e : list){
+                    if(e instanceof LivingEntity entity && e != pAttacker){
+                        entity.hurt(DamageSource.GENERIC, 0.5f + 0.5f * pLevel);
+                    }
                 }
             }
         }

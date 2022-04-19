@@ -11,6 +11,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraftforge.entity.PartEntity;
 
 public class HexEnchant extends Enchantment{
 
@@ -63,23 +64,40 @@ public class HexEnchant extends Enchantment{
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity target = (LivingEntity) pTarget;
         ItemStack heldItem = pAttacker.getMainHandItem();
         float attackDamage = 1f;
-        float health = target.getMaxHealth();
-        float magicDamage = 0.01f * health * pLevel;
 
         if(heldItem.getItem() instanceof SwordItem sword){
             attackDamage = sword.getDamage() + 1;
         }
 
-        target.hurt(DamageSource.playerAttack((Player) pAttacker), attackDamage); //normal attack
+        pTarget.hurt(DamageSource.mobAttack(pAttacker), attackDamage); //normal attack
 
-        if(magicDamage <= 20){
-            target.hurt(DamageSource.MAGIC, magicDamage);
+        if(pTarget instanceof LivingEntity target){
+
+            float health = target.getMaxHealth();
+            float magicDamage = 0.01f * health * pLevel;
+
+            if(magicDamage <= 20){
+                target.hurt(DamageSource.MAGIC, magicDamage);
+            }
+            else{
+                target.hurt(DamageSource.MAGIC, 20); //caps out at 20 additional damage
+            }
         }
-        else{
-            target.hurt(DamageSource.MAGIC, 20); //caps out at 20 additional damage
+        else if(pTarget instanceof PartEntity<?> t && t.getParent() instanceof LivingEntity target){
+            //if entity is a component of a multipart eg. enderdragon
+
+            float health = target.getMaxHealth();
+            float magicDamage = 0.01f * health * pLevel;
+
+            if(magicDamage <= 20){
+                target.hurt(DamageSource.MAGIC, magicDamage);
+            }
+            else{
+                target.hurt(DamageSource.MAGIC, 20);
+            }
+
         }
 
     }

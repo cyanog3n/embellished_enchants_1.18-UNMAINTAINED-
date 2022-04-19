@@ -68,8 +68,8 @@ public class StunEnchant extends Enchantment{
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity target = (LivingEntity) pTarget;
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10 + 10 * pLevel, 255, false, false, false));
-
+        if(pTarget instanceof LivingEntity target){
+            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10 + 10 * pLevel, 255, false, false, false));
+        }
     }
 }

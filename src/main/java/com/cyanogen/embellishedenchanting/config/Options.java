@@ -20,9 +20,11 @@ public class Options {
         public final ForgeConfigSpec.ConfigValue<Boolean> Grappling;
         public final ForgeConfigSpec.ConfigValue<Boolean> Hex;
         public final ForgeConfigSpec.ConfigValue<Boolean> Immortal;
+        public final ForgeConfigSpec.ConfigValue<Boolean> Shockwave;
         public final ForgeConfigSpec.ConfigValue<Boolean> Shattering;
         public final ForgeConfigSpec.ConfigValue<Boolean> Stun;
         public final ForgeConfigSpec.ConfigValue<Boolean> Thunderbolt;
+        public final ForgeConfigSpec.ConfigValue<Boolean> Voiding;
 
         public final ForgeConfigSpec.ConfigValue<Boolean> DeflagrationCurse;
 
@@ -32,9 +34,11 @@ public class Options {
         public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> GrapplingRarity;
         public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> HexRarity;
         public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> ImmortalRarity;
+        public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> ShockwaveRarity;
         public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> ShatteringRarity;
         public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> StunRarity;
         public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> ThunderboltRarity;
+        public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> VoidingRarity;
 
         public final ForgeConfigSpec.ConfigValue<Enchantment.Rarity> DeflagrationCurseRarity;
 
@@ -83,6 +87,14 @@ public class Options {
             builder.pop();
 
             //all
+            builder.push("Shockwave");
+            this.Shockwave = builder.comment("Enable or disable the Shockwave Enchantment")
+                    .define("ShockwaveEnchantEnabled", defaultState);
+            this.ShockwaveRarity = builder.comment("Set rarity of the Shockwave Enchantment","Accepted values: COMMON, UNCOMMON, RARE, VERY_RARE")
+                    .define("ShockwaveRarity",UNCOMMON);
+            builder.pop();
+
+            //all
             builder.push("Shattering");
             this.Shattering = builder.comment("Enable or disable the Shattering Enchantment")
                     .define("ShatteringEnchantEnabled", defaultState);
@@ -96,6 +108,14 @@ public class Options {
                     .define("StunEnchantEnabled", defaultState);
             this.StunRarity = builder.comment("Set rarity of the Stun Enchantment","Accepted values: COMMON, UNCOMMON, RARE, VERY_RARE")
                     .define("StunRarity",UNCOMMON);
+            builder.pop();
+
+            //all
+            builder.push("Voiding");
+            this.Voiding = builder.comment("Enable or disable the Voiding Enchantment")
+                    .define("VoidingEnchantEnabled", defaultState);
+            this.VoidingRarity = builder.comment("Set rarity of the Voiding Enchantment","Accepted values: COMMON, UNCOMMON, RARE, VERY_RARE")
+                    .define("VoidingRarity",COMMON);
             builder.pop();
 
             //loot only

@@ -50,10 +50,13 @@ public class ThunderboltEnchant extends Enchantment {
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity living = (LivingEntity) pTarget;
-        DamageSource source = living.getLastDamageSource();
+        DamageSource source = null;
 
-        BlockPos posT = living.getOnPos();
+        if(pTarget instanceof LivingEntity living){
+            source = living.getLastDamageSource();
+        }
+
+        BlockPos posT = pTarget.getOnPos();
 
         if(!pTarget.level.isClientSide && source != null){
 

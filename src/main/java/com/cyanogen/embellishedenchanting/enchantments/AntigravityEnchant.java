@@ -53,8 +53,10 @@ public class AntigravityEnchant extends Enchantment {
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity target = (LivingEntity) pTarget;
-        target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * pLevel));
+        if(pTarget instanceof LivingEntity target){
+            target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 20 * pLevel));
+        }
+
 
     }
 }

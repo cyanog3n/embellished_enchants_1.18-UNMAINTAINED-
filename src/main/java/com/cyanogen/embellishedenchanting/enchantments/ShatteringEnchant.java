@@ -80,7 +80,6 @@ public class ShatteringEnchant extends Enchantment{
     @Override
     public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
 
-        LivingEntity target = (LivingEntity) pTarget;
         ItemStack heldItem = pAttacker.getMainHandItem();
         float attackDamage = 0f;
 
@@ -98,7 +97,7 @@ public class ShatteringEnchant extends Enchantment{
 
 
         if(Math.random() <= (0.05 * pLevel + 0.05)){
-            target.hurt(DamageSource.playerAttack((Player) pAttacker), attackDamage + extraDamage);
+            pTarget.hurt(DamageSource.mobAttack(pAttacker), attackDamage + extraDamage);
 
             if(durability - heldItem.getDamageValue() >= damage){
                 heldItem.hurtAndBreak(damage, pAttacker, LivingEntity::stopUsingItem);

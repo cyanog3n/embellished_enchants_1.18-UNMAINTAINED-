@@ -86,11 +86,18 @@ public class _RegisterEnchants {
             new EquipmentSlot[]{ EquipmentSlot.MAINHAND }
     ));
 
-    public static final RegistryObject<Enchantment> SEISMIC = ENCHANTS.register("seismic", () -> new SeismicEnchant(
-            Options.COMMON.SeismicRarity.get(),
+    public static final RegistryObject<Enchantment> SHOCKWAVE = ENCHANTS.register("shockwave", () -> new ShockwaveEnchant(
+            Options.COMMON.ShockwaveRarity.get(),
             EnchantmentCategory.BOW,
             new EquipmentSlot[]{ EquipmentSlot.MAINHAND }
     ));
+
+    public static final RegistryObject<Enchantment> VOIDING = ENCHANTS.register("voiding", () -> new VoidingEnchant(
+            Options.COMMON.VoidingRarity.get(),
+            EnchantmentCategory.DIGGER,
+            new EquipmentSlot[]{ EquipmentSlot.MAINHAND }
+    ));
+
 
     //---UNOBTAINABLE---//
 
