@@ -76,7 +76,11 @@ public class HexEnchant extends Enchantment{
         if(pTarget instanceof LivingEntity target){
 
             float health = target.getMaxHealth();
-            float magicDamage = 0.01f * health * pLevel;
+            float magicDamage = 0.012f * health * pLevel;
+
+            if(attackDamage <7){
+                magicDamage = magicDamage * attackDamage / 7; //nerf enchantment damage on weaker weapons
+            }
 
             if(magicDamage <= 20){
                 target.hurt(DamageSource.MAGIC, magicDamage);
@@ -89,7 +93,11 @@ public class HexEnchant extends Enchantment{
             //if entity is a component of a multipart eg. enderdragon
 
             float health = target.getMaxHealth();
-            float magicDamage = 0.01f * health * pLevel;
+            float magicDamage = 0.012f * health * pLevel;
+
+            if(attackDamage <7){
+                magicDamage = magicDamage * attackDamage / 7;
+            }
 
             if(magicDamage <= 20){
                 target.hurt(DamageSource.MAGIC, magicDamage);

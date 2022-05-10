@@ -15,7 +15,6 @@ public class _RegisterEnchants {
 
     public static final DeferredRegister<Enchantment> ENCHANTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, EmbellishedEnchanting.MOD_ID);
 
-
     //---ONLY OBTAINABLE THROUGH LOOT---//
 
     public static final RegistryObject<Enchantment> THUNDERBOLT = ENCHANTS.register("thunderbolt", () -> new ThunderboltEnchant(
@@ -23,12 +22,6 @@ public class _RegisterEnchants {
             EnchantmentCategory.BOW,
             new EquipmentSlot[]{ EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND }
 
-    ));
-
-    public static final RegistryObject<Enchantment> IMMORTAL = ENCHANTS.register("immortal", () -> new ImmortalEnchant(
-            Options.COMMON.ImmortalRarity.get(),
-            EnchantmentCategory.DIGGER,
-            new EquipmentSlot[]{ EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND }
     ));
 
     //---TREASURE---//
@@ -98,9 +91,19 @@ public class _RegisterEnchants {
             new EquipmentSlot[]{ EquipmentSlot.MAINHAND }
     ));
 
+    //---SPECIAL---//
 
-    //---UNOBTAINABLE---//
+    public static final RegistryObject<Enchantment> DEATHS_KNELL = ENCHANTS.register("deaths_knell", () -> new DeathsKnellEnchant(
+            Enchantment.Rarity.VERY_RARE,
+            EnchantmentCategory.WEAPON,
+            new EquipmentSlot[]{ EquipmentSlot.MAINHAND }
+    ));
 
+    public static final RegistryObject<Enchantment> IMMORTAL = ENCHANTS.register("immortal", () -> new ImmortalEnchant(
+            Enchantment.Rarity.VERY_RARE,
+            EnchantmentCategory.DIGGER,
+            new EquipmentSlot[]{ EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND }
+    ));
 
     public static void register(IEventBus eventBus){
         ENCHANTS.register(eventBus);

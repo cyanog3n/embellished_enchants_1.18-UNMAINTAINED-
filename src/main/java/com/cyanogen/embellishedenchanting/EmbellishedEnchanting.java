@@ -1,6 +1,8 @@
 package com.cyanogen.embellishedenchanting;
 
 import com.cyanogen.embellishedenchanting.config.Options;
+import com.cyanogen.embellishedenchanting.effects._RegisterEffects;
+import com.cyanogen.embellishedenchanting.enchantments.EnchantmentEventHandler;
 import com.cyanogen.embellishedenchanting.enchantments._RegisterEnchants;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,6 +29,7 @@ public class EmbellishedEnchanting
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
         _RegisterEnchants.register(eventBus);
+        _RegisterEffects.register(eventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Options.COMMON_SPEC);
 
 
